@@ -1,9 +1,12 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation } from '@tanstack/react-query';
 import { HiArrowRight, HiOutlineSparkles, HiOutlineLightningBolt, HiOutlineShieldCheck, HiOutlineTruck } from 'react-icons/hi';
 import api from '@/lib/api';
 import ProductCard from '@/components/ProductCard';
+import { useCartStore } from '@/stores/cartStore';
+import { useAuthStore } from '@/stores/authStore';
+import toast from 'react-hot-toast';
 
 const categories = [
   { name: 'Headphones', icon: '🎧', gradient: 'from-blue-500/20 to-purple-500/20' },
@@ -34,6 +37,15 @@ export default function HomePage() {
   const { data: featuredData } = useQuery({
     queryKey: ['products', 'featured'],
     queryFn: () => api.get('/products/featured').then((r) => r.data.data),
+  });
+
+  const { setCart, openCart } = useCartStore();
+  const { isAuthenticated } = useAuthStore();
+
+  const addToCartMutation = useMutation({
+    mutationFn: (productId: string) => api.post('/cart', { productId, quantity: 1 }),
+    onSuccess: (res) => { setCart(res.data.data); openCart(); toast.success('Added to cart!'); },
+    onError: () => toast.error('Failed to add to cart'),
   });
 
   return (
@@ -174,7 +186,12 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {(featuredData || []).slice(0, 8).map((product: any) => (
-              <ProductCard key={product._id} product={product} />
+              <ProductCard key={product._id} product={product}
+                onAddToCart={() => {
+                  if (!isAuthenticated) { toast.error('Please sign in to add to cart'); return; }
+                  addToCartMutation.mutate(product._id);
+                }}
+              />
             ))}
           </div>
         </div>

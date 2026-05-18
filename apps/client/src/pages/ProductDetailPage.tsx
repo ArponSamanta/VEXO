@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { motion } from 'framer-motion';
@@ -17,6 +17,11 @@ export default function ProductDetailPage() {
   const [quantity, setQuantity] = useState(1);
   const { setCart, openCart } = useCartStore();
   const { isAuthenticated, user } = useAuthStore();
+
+  // Scroll to top when slug changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [slug]);
 
   // Review states
   const [rating, setRating] = useState(5);
@@ -160,19 +165,28 @@ export default function ProductDetailPage() {
           </p>
 
           {/* Quantity + Add to Cart */}
-          <div className="flex items-center gap-4 pt-2">
-            <div className="flex items-center glass-card">
-              <button onClick={() => setQuantity(Math.max(1, quantity - 1))} className="p-3 hover:bg-vexo-glass transition-colors"><HiOutlineMinus size={18} /></button>
-              <span className="w-12 text-center font-semibold">{quantity}</span>
-              <button onClick={() => setQuantity(Math.min(product.stock, quantity + 1))} className="p-3 hover:bg-vexo-glass transition-colors"><HiOutlinePlus size={18} /></button>
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
+            <div className="flex items-center gap-4">
+              <div className="flex items-center glass-card">
+                <button onClick={() => setQuantity(Math.max(1, quantity - 1))} className="p-3 hover:bg-vexo-glass transition-colors"><HiOutlineMinus size={18} /></button>
+                <span className="w-12 text-center font-semibold">{quantity}</span>
+                <button onClick={() => setQuantity(Math.min(product.stock, quantity + 1))} className="p-3 hover:bg-vexo-glass transition-colors"><HiOutlinePlus size={18} /></button>
+              </div>
+              <button className="p-4 glass-card-hover sm:hidden"><HiOutlineHeart size={20} /></button>
             </div>
-            <button onClick={() => {
-              if (!isAuthenticated) { toast.error('Please sign in'); return; }
-              addToCartMutation.mutate();
-            }} disabled={product.stock === 0} className="btn-primary flex-1 flex items-center justify-center gap-2 py-4">
-              <HiOutlineShoppingBag size={20} /> Add to Cart
-            </button>
-            <button className="p-4 glass-card-hover"><HiOutlineHeart size={20} /></button>
+            <div className="flex gap-4 flex-1">
+              <button onClick={() => {
+                if (!isAuthenticated) { toast.error('Please sign in'); return; }
+                addToCartMutation.mutate();
+              }} disabled={product.stock === 0 || addToCartMutation.isPending} className="btn-primary flex-1 flex items-center justify-center gap-2 py-4 disabled:opacity-70 disabled:cursor-not-allowed transition-all">
+                {addToCartMutation.isPending ? (
+                  <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                ) : (
+                  <><HiOutlineShoppingBag size={20} /> Add to Cart</>
+                )}
+              </button>
+              <button className="p-4 glass-card-hover hidden sm:block"><HiOutlineHeart size={20} /></button>
+            </div>
           </div>
 
           {/* Specs */}
