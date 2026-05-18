@@ -36,7 +36,7 @@ export const register = asyncHandler(async (req: Request, res: Response) => {
   res.cookie('refreshToken', refreshToken, {
     httpOnly: true,
     secure: config.nodeEnv === 'production',
-    sameSite: 'lax',
+    sameSite: config.nodeEnv === 'production' ? 'none' : 'lax',
     maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
   });
 

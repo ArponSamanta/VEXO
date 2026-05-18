@@ -19,7 +19,7 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: [config.clientUrl, config.adminUrl, 'http://localhost:5175'],
+  origin: [config.clientUrl, config.adminUrl, config.superAdminUrl],
   credentials: true,
 }));
 app.use(express.json({ limit: '10mb' }));

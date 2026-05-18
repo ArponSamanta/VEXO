@@ -21,6 +21,7 @@ const config = {
 
   clientUrl: process.env.CLIENT_URL || 'http://localhost:5173',
   adminUrl: process.env.ADMIN_URL || 'http://localhost:5174',
+  superAdminUrl: process.env.SUPER_ADMIN_URL || 'http://localhost:5175',
 };
 
 export default config;
