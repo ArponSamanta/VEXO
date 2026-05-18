@@ -29,7 +29,7 @@ ENV JWT_SECRET="vexo-secure-prod-secret-9941a3d"
 ENV JWT_REFRESH_SECRET="vexo-refresh-prod-secret-b841f"
 
 # Build the server package (and its dependencies)
-RUN pnpm --filter @vexo/server build
+RUN npx turbo run build --filter=@vexo/server
 
 # Expose port
 EXPOSE 8080
