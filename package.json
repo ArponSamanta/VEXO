@@ -1,0 +1,21 @@
+{
+  "name": "vexo-ecommerce",
+  "version": "1.0.0",
+  "private": true,
+  "description": "VEXO — Futuristic E-commerce Platform",
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "dev:client": "pnpm --filter @vexo/client dev",
+    "dev:admin": "pnpm --filter @vexo/admin dev",
+    "dev:super-admin": "pnpm --filter @vexo/super-admin dev",
+    "dev:server": "pnpm --filter @vexo/server dev",
+    "seed": "pnpm --filter @vexo/server seed"
+  },
+  "devDependencies": {
+    "turbo": "^2.3.0",
+    "typescript": "^5.7.0"
+  },
+  "packageManager": "pnpm@9.15.0"
+}
