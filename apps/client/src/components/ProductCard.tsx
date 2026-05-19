@@ -63,6 +63,7 @@ export default function ProductCard({ product, onAddToCart, onToggleWishlist, is
           </button>
           <button
             onClick={(e) => { e.preventDefault(); onToggleWishlist?.(); }}
+            aria-label={isInWishlist ? 'Remove from wishlist' : 'Add to wishlist'}
             className={`p-2 rounded-lg border transition-all ${
               isInWishlist
                 ? 'bg-vexo-pink/20 border-vexo-pink text-vexo-pink'

@@ -53,22 +53,38 @@ export default function Navbar() {
         {/* Actions */}
         <div className="flex items-center gap-3">
           {/* Search */}
-          <button onClick={() => setSearchOpen(!searchOpen)}
-            className="p-2 rounded-lg text-vexo-text-secondary hover:text-white hover:bg-vexo-glass transition-all" id="search-toggle">
+          <button
+            onClick={() => setSearchOpen(!searchOpen)}
+            aria-label="Toggle search bar"
+            className="p-2 rounded-lg text-vexo-text-secondary hover:text-white hover:bg-vexo-glass transition-all"
+            id="search-toggle"
+          >
             <HiOutlineSearch size={20} />
           </button>
 
           {/* Wishlist */}
-          <Link to="/wishlist" className="p-2 rounded-lg text-vexo-text-secondary hover:text-white hover:bg-vexo-glass transition-all hidden md:block">
+          <Link
+            to="/wishlist"
+            aria-label="View wishlist"
+            className="p-2 rounded-lg text-vexo-text-secondary hover:text-white hover:bg-vexo-glass transition-all hidden md:block"
+          >
             <HiOutlineHeart size={20} />
           </Link>
 
           {/* Cart */}
-          <button onClick={openCart} className="p-2 rounded-lg text-vexo-text-secondary hover:text-white hover:bg-vexo-glass transition-all relative" id="cart-toggle">
+          <button
+            onClick={openCart}
+            aria-label="Open cart"
+            className="p-2 rounded-lg text-vexo-text-secondary hover:text-white hover:bg-vexo-glass transition-all relative"
+            id="cart-toggle"
+          >
             <HiOutlineShoppingBag size={20} />
             {totalItems > 0 && (
-              <motion.span initial={{ scale: 0 }} animate={{ scale: 1 }}
-                className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-vexo-blue text-xs font-bold flex items-center justify-center text-vexo-bg">
+              <motion.span
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-vexo-blue text-xs font-bold flex items-center justify-center text-vexo-bg"
+              >
                 {totalItems}
               </motion.span>
             )}
@@ -93,7 +109,11 @@ export default function Navbar() {
           )}
 
           {/* Mobile menu */}
-          <button onClick={() => setMobileOpen(!mobileOpen)} className="p-2 md:hidden text-vexo-text-secondary hover:text-white">
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+            className="p-2 md:hidden text-vexo-text-secondary hover:text-white"
+          >
             {mobileOpen ? <HiOutlineX size={24} /> : <HiOutlineMenu size={24} />}
           </button>
         </div>
