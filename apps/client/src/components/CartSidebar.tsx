@@ -55,7 +55,11 @@ export default function CartSidebar() {
             <h2 className="font-heading font-bold text-xl">
               Cart <span className="text-vexo-text-muted text-base font-normal">({totalItems})</span>
             </h2>
-            <button onClick={closeCart} className="p-2 rounded-lg hover:bg-vexo-glass transition-colors">
+            <button
+              onClick={closeCart}
+              aria-label="Close cart"
+              className="p-2 rounded-lg hover:bg-vexo-glass transition-colors"
+            >
               <HiOutlineX size={20} />
             </button>
           </div>
