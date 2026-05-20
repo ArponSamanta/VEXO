@@ -168,11 +168,11 @@ export default function ProductDetailPage() {
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
             <div className="flex items-center gap-4">
               <div className="flex items-center glass-card">
-                <button onClick={() => setQuantity(Math.max(1, quantity - 1))} className="p-3 hover:bg-vexo-glass transition-colors"><HiOutlineMinus size={18} /></button>
+                <button onClick={() => setQuantity(Math.max(1, quantity - 1))} aria-label="Decrease quantity" className="p-3 hover:bg-vexo-glass transition-colors"><HiOutlineMinus size={18} /></button>
                 <span className="w-12 text-center font-semibold">{quantity}</span>
-                <button onClick={() => setQuantity(Math.min(product.stock, quantity + 1))} className="p-3 hover:bg-vexo-glass transition-colors"><HiOutlinePlus size={18} /></button>
+                <button onClick={() => setQuantity(Math.min(product.stock, quantity + 1))} aria-label="Increase quantity" className="p-3 hover:bg-vexo-glass transition-colors"><HiOutlinePlus size={18} /></button>
               </div>
-              <button className="p-4 glass-card-hover sm:hidden"><HiOutlineHeart size={20} /></button>
+              <button aria-label="Add to wishlist" className="p-4 glass-card-hover sm:hidden"><HiOutlineHeart size={20} /></button>
             </div>
             <div className="flex gap-4 flex-1">
               <button onClick={() => {
@@ -185,7 +185,7 @@ export default function ProductDetailPage() {
                   <><HiOutlineShoppingBag size={20} /> Add to Cart</>
                 )}
               </button>
-              <button className="p-4 glass-card-hover hidden sm:block"><HiOutlineHeart size={20} /></button>
+              <button aria-label="Add to wishlist" className="p-4 glass-card-hover hidden sm:block"><HiOutlineHeart size={20} /></button>
             </div>
           </div>
 
@@ -238,6 +238,7 @@ export default function ProductDetailPage() {
                         <button
                           key={num}
                           type="button"
+                          aria-label={`Rate ${num} star${num > 1 ? 's' : ''}`}
                           className="focus:outline-none transition-transform hover:scale-110"
                           onClick={() => setRating(num)}
                           onMouseEnter={() => setHoverRating(num)}
