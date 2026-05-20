@@ -25,10 +25,10 @@ const footerLinks = {
 };
 
 const socialIcons = [
-  { Icon: FaXTwitter, href: '#' },
-  { Icon: FaInstagram, href: '#' },
-  { Icon: FaYoutube, href: '#' },
-  { Icon: FaDiscord, href: '#' },
+  { Icon: FaXTwitter, href: '#', label: 'Twitter' },
+  { Icon: FaInstagram, href: '#', label: 'Instagram' },
+  { Icon: FaYoutube, href: '#', label: 'YouTube' },
+  { Icon: FaDiscord, href: '#', label: 'Discord' },
 ];
 
 export default function Footer() {
@@ -51,7 +51,7 @@ export default function Footer() {
             <div className="flex gap-2">
               <div className="relative flex-1">
                 <HiOutlineMail className="absolute left-3 top-1/2 -translate-y-1/2 text-vexo-text-muted" size={18} />
-                <input type="email" placeholder="Enter your email" className="input-field pl-10 py-2.5 text-sm" />
+                <input type="email" placeholder="Enter your email" aria-label="Email address for newsletter" className="input-field pl-10 py-2.5 text-sm" />
               </div>
               <button className="btn-primary py-2.5 px-4 text-sm">Subscribe</button>
             </div>
@@ -78,8 +78,8 @@ export default function Footer() {
         <div className="border-t border-vexo-border mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-vexo-text-muted">© 2026 VEXO. All rights reserved.</p>
           <div className="flex items-center gap-4">
-            {socialIcons.map(({ Icon, href }, i) => (
-              <a key={i} href={href} className="text-vexo-text-muted hover:text-vexo-blue transition-colors">
+            {socialIcons.map(({ Icon, href, label }, i) => (
+              <a key={i} href={href} aria-label={label} className="text-vexo-text-muted hover:text-vexo-blue transition-colors">
                 <Icon size={18} />
               </a>
             ))}
