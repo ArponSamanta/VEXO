@@ -1,0 +1,3 @@
+## 2025-05-14 - Accessible Quick Actions in Product Cards
+**Learning:** Nesting interactive elements like buttons inside an anchor tag (`Link`) is an accessibility anti-pattern that breaks navigation for screen readers and keyboard users. Additionally, hover-only actions are inaccessible to keyboard users unless they are also shown on focus.
+**Action:** Move interactive children to be siblings of the main link within a shared relative container. Use `group-focus-within:opacity-100` and `group-focus-within:translate-y-0` (or similar) to ensure these actions are visible when the user tabs through the interface.
