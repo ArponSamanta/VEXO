@@ -1,0 +1,3 @@
+## 2025-05-15 - Improving ProductCard Accessibility and Keyboard Navigation
+**Learning:** Nesting interactive elements (like buttons) inside an anchor tag (`<Link>`) is invalid HTML and breaks navigation for screen reader users. Additionally, UI elements that are only visible on hover (like "Quick Actions") are completely inaccessible to keyboard-only users.
+**Action:** Use a shared `relative` container for the image and actions, keeping them as siblings. Use Tailwind's `group-focus-within:opacity-100` and `group-focus-within:translate-y-0` to ensure hidden UI elements are revealed when a keyboard user tabs into them.
