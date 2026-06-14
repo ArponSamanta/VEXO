@@ -1,0 +1,3 @@
+## 2025-05-22 - Improved Accessibility in Product Cards
+**Learning:** Nesting interactive elements like buttons inside an anchor (`Link`) is invalid HTML and breaks navigation for keyboard users. Additionally, "Quick Action" buttons that only appear on hover are inaccessible to screen readers and keyboard-only users unless explicitly handled with focus states.
+**Action:** Always place interactive buttons as siblings to main card links using a shared relative container. Use `group-focus-within` classes to ensure hidden actions become visible when focused, and provide descriptive `aria-label` attributes for all icon-only buttons.
