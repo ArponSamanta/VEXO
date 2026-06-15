@@ -1,0 +1,3 @@
+## 2025-05-15 - Improving Interactive Card Accessibility
+**Learning:** Elements that appear only on hover (like "Quick Actions" on product cards) are inaccessible to keyboard users unless explicitly handled with focus-within states. Additionally, star ratings should be treated as a single image with a descriptive label rather than a series of individual icons.
+**Action:** Always use `group-focus-within` in combination with `group-hover` for overlay actions. Wrap star rating components in a `div` with `role="img"` and a calculated `aria-label`, while using `aria-hidden="true"` on individual stars.
