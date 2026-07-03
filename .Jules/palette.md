@@ -1,0 +1,3 @@
+## 2025-05-14 - Keyboard Accessibility for Hover-Only Actions
+**Learning:** Elements hidden by default and only shown on hover (e.g., product quick actions) are completely inaccessible to keyboard users unless explicitly handled. Using Tailwind's `group-focus-within:opacity-100` and `group-focus-within:translate-y-0` on the target, combined with the `group` class on a common parent, allows these elements to be revealed when any of their children receive focus.
+**Action:** Always ensure that any UI element revealed on hover is also revealed when its container or any of its children receive focus using `group-focus-within` or similar focus states.
