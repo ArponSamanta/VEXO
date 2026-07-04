@@ -54,20 +54,22 @@ export default function ProductCard({ product, onAddToCart, onToggleWishlist, is
         </div>
 
         {/* Quick actions on hover */}
-        <div className="absolute bottom-3 left-3 right-3 flex gap-2 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+        <div className="absolute bottom-3 left-3 right-3 flex gap-2 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 translate-y-4 group-hover:translate-y-0 group-focus-within:translate-y-0 transition-all duration-300">
           <button
             onClick={(e) => { e.preventDefault(); onAddToCart?.(); }}
-            className="flex-1 btn-primary py-2 text-sm flex items-center justify-center gap-2"
+            className="flex-1 btn-primary py-2 text-sm flex items-center justify-center gap-2 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-vexo-bg focus-visible:ring-vexo-blue"
+            aria-label={`Add ${product.name} to cart`}
           >
             <HiOutlineShoppingBag size={16} /> Add to Cart
           </button>
           <button
             onClick={(e) => { e.preventDefault(); onToggleWishlist?.(); }}
-            className={`p-2 rounded-lg border transition-all ${
+            className={`p-2 rounded-lg border transition-all focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-vexo-bg focus-visible:ring-vexo-pink ${
               isInWishlist
                 ? 'bg-vexo-pink/20 border-vexo-pink text-vexo-pink'
                 : 'bg-vexo-glass border-vexo-border text-white hover:border-vexo-pink hover:text-vexo-pink'
             }`}
+            aria-label={isInWishlist ? `Remove ${product.name} from wishlist` : `Add ${product.name} to wishlist`}
           >
             <HiOutlineHeart size={16} />
           </button>
@@ -85,9 +87,16 @@ export default function ProductCard({ product, onAddToCart, onToggleWishlist, is
 
         {/* Rating */}
         <div className="flex items-center gap-1 mt-2">
-          {[...Array(5)].map((_, i) => (
-            <HiStar key={i} size={14} className={i < Math.round(product.rating) ? 'text-yellow-400' : 'text-vexo-text-muted/30'} />
-          ))}
+          <div className="flex items-center gap-0.5" role="img" aria-label={`${product.rating} out of 5 stars`}>
+            {[...Array(5)].map((_, i) => (
+              <HiStar
+                key={i}
+                size={14}
+                className={i < Math.round(product.rating) ? 'text-yellow-400' : 'text-vexo-text-muted/30'}
+                aria-hidden="true"
+              />
+            ))}
+          </div>
           <span className="text-xs text-vexo-text-muted ml-1">({product.numReviews})</span>
         </div>
 
