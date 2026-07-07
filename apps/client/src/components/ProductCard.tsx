@@ -53,23 +53,25 @@ export default function ProductCard({ product, onAddToCart, onToggleWishlist, is
           {product.featured && <span className="badge-featured">Featured</span>}
         </div>
 
-        {/* Quick actions on hover */}
-        <div className="absolute bottom-3 left-3 right-3 flex gap-2 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+        {/* Quick actions on hover & focus */}
+        <div className="absolute bottom-3 left-3 right-3 flex gap-2 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 translate-y-4 group-hover:translate-y-0 group-focus-within:translate-y-0 transition-all duration-300">
           <button
             onClick={(e) => { e.preventDefault(); onAddToCart?.(); }}
+            aria-label={`Add ${product.name} to cart`}
             className="flex-1 btn-primary py-2 text-sm flex items-center justify-center gap-2"
           >
-            <HiOutlineShoppingBag size={16} /> Add to Cart
+            <HiOutlineShoppingBag size={16} aria-hidden="true" /> Add to Cart
           </button>
           <button
             onClick={(e) => { e.preventDefault(); onToggleWishlist?.(); }}
+            aria-label={isInWishlist ? `Remove ${product.name} from wishlist` : `Add ${product.name} to wishlist`}
             className={`p-2 rounded-lg border transition-all ${
               isInWishlist
                 ? 'bg-vexo-pink/20 border-vexo-pink text-vexo-pink'
                 : 'bg-vexo-glass border-vexo-border text-white hover:border-vexo-pink hover:text-vexo-pink'
             }`}
           >
-            <HiOutlineHeart size={16} />
+            <HiOutlineHeart size={16} aria-hidden="true" />
           </button>
         </div>
       </Link>
@@ -84,11 +86,20 @@ export default function ProductCard({ product, onAddToCart, onToggleWishlist, is
         </Link>
 
         {/* Rating */}
-        <div className="flex items-center gap-1 mt-2">
+        <div
+          className="flex items-center gap-1 mt-2"
+          role="img"
+          aria-label={`${product.rating} out of 5 stars based on ${product.numReviews} reviews`}
+        >
           {[...Array(5)].map((_, i) => (
-            <HiStar key={i} size={14} className={i < Math.round(product.rating) ? 'text-yellow-400' : 'text-vexo-text-muted/30'} />
+            <HiStar
+              key={i}
+              size={14}
+              aria-hidden="true"
+              className={i < Math.round(product.rating) ? 'text-yellow-400' : 'text-vexo-text-muted/30'}
+            />
           ))}
-          <span className="text-xs text-vexo-text-muted ml-1">({product.numReviews})</span>
+          <span className="text-xs text-vexo-text-muted ml-1" aria-hidden="true">({product.numReviews})</span>
         </div>
 
         {/* Price */}
