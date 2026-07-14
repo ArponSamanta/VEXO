@@ -1,0 +1,3 @@
+## 2025-05-14 - [Accessible Star Ratings & Focus States]
+**Learning:** Standard icon-based rating systems are often repetitive and noisy for screen readers. Using `role="img"` with a single descriptive `aria-label` on the container, while hiding individual stars with `aria-hidden="true"`, provides a much cleaner experience. Additionally, when using hover-triggered actions (like product quick-actions), using `group-focus-within` is essential to ensure these actions are discoverable and usable for keyboard-only users.
+**Action:** Always wrap rating icons in a container with a descriptive ARIA label and hide the individual icons. Use `group-focus-within` on containers with hover-only children to support keyboard navigation.
