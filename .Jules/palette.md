@@ -1,0 +1,3 @@
+## 2025-05-14 - [Accessibility] Nested Interactive Elements in Product Cards
+**Learning:** Product cards often wrap the entire content in a `Link` to make the whole card clickable. However, nesting buttons (like "Add to Cart") inside an anchor tag is invalid HTML and breaks screen reader navigation, as the link and buttons compete for focus and activation.
+**Action:** Use a relative container for the card with a "main" link, and position secondary action buttons as siblings to the link (not children) using absolute positioning or CSS grid/flex layers to maintain the visual design while ensuring semantic validity.
