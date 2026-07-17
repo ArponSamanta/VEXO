@@ -1,0 +1,3 @@
+## 2025-07-17 - Sibling-based Interactive Hover Overlays
+**Learning:** Nesting interactive buttons inside parent `<Link>` anchors is an HTML validation error and an accessibility anti-pattern. It breaks keyboard tab sequences and confuses screen-reader announcements. Separating them into a parent sibling-based layout where the anchor and buttons are siblings inside a relative container preserves the visual aesthetics of the overlay hover while delivering perfect keyboard focus-within support.
+**Action:** Always structure hover-reveal cards with sibling-based layouts. Reveal overlay containers smoothly on both mouse hover and keyboard focus-within states via Tailwind's `group-focus-within` modifier.
