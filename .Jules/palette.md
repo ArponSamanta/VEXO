@@ -1,0 +1,3 @@
+## 2026-03-01 - [Interactive Elements Nesting & Focus-Within Accessibility]
+**Learning:** Nesting interactive buttons inside a navigation anchor/Link tag is invalid HTML (HTML5 specifications) and breaks screen reader focus and standard navigation. Standard UX hover overlays should be keyboard-accessible using `group-focus-within` triggers rather than strictly hover-only states.
+**Action:** Move interactive action overlay buttons out of any Link tag to be absolute sibling elements within a shared relative relative parent, and style overlay transitions to respond to `group-focus-within` for full keyboard accessibility support.
