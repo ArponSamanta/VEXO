@@ -1,0 +1,5 @@
+# Palette's Journal - Critical UX/Accessibility Learnings
+
+## 2026-07-20 - [ProductCard Keyboard Accessibility & Nesting]
+**Learning:** Nesting interactive elements like `<button>` inside standard `<a>` or `<Link>` tags is invalid HTML5, leading to unstable keyboard focus states, unexpected click behaviors, and screen reader confusion. Furthermore, hiding action buttons entirely on non-hover states makes them completely inaccessible to keyboard-only users who rely on the `Tab` key to discover and trigger interface elements.
+**Action:** Move interactive quick-action buttons outside the main card Link component. Wrap the Link and buttons inside a shared, focus-aware `group` container. Apply Tailwind's `group-focus-within:opacity-100` and `group-focus-within:translate-y-0` along with custom `focus-visible` styling (including `focus-visible:ring-offset-2` and `focus-visible:ring-offset-vexo-bg`) on the interactive buttons. This preserves visual cleanliness for mouse users while providing first-class accessibility and hover-like animations for keyboard users.
