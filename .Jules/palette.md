@@ -1,0 +1,3 @@
+## 2026-03-01 - [Interactive Nesting and Focus Within]
+**Learning:** Nesting interactive buttons inside an anchor (`Link`) tag results in invalid HTML, keyboard traps, and unpredictable screen reader behavior. Hover-only elements can be entirely hidden from keyboard-only users unless focus states trigger their visibility.
+**Action:** Extract nested interactive components into shared relative containers. Use Tailwind's `group-focus-within:opacity-100` and `group-focus-within:translate-y-0` styles combined with `focus-visible:ring-offset-2` to guarantee high accessibility and smooth keyboard focus transitions.
