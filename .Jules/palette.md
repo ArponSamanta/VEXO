@@ -1,0 +1,3 @@
+## 2026-02-17 - Un-nesting interactive elements & Keyboard accessibility pattern
+**Learning:** Nesting interactive elements like `<button>` elements within an outer `Link` causes severe keyboard traps and navigation errors for screen reader users, while limiting tab order flow. Also, hidden action panels only showing on hover lock out keyboard users.
+**Action:** Un-nest inner `<button>` elements by moving them to a wrapper sibling of the `Link` inside a shared `group` container. Enable key hover/focus synchronization by utilizing Tailwind's `group-focus-within:opacity-100` and `group-focus-within:translate-y-0` styles.
