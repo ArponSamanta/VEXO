@@ -1,0 +1,3 @@
+## 2026-07-23 - State-driven Icon & Menu Accessibility in Navigation Header
+**Learning:** Icon-only actions (Search, Wishlist, Cart, User) and interactive menus must maintain accurate `aria-label`, `aria-expanded`, and state-driven roles (`menu`, `menuitem`) to remain fully accessible and interactive for screen readers. Using dynamic pluralization on counts (e.g., cart items) prevents confusing screen reader output.
+**Action:** Always verify icon-only buttons have localized aria labels, handle conditional plurals on counted badges, and assign corresponding ARIA properties to group menus for dynamic state updates.

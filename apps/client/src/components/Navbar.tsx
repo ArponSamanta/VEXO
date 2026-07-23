@@ -53,22 +53,40 @@ export default function Navbar() {
         {/* Actions */}
         <div className="flex items-center gap-3">
           {/* Search */}
-          <button onClick={() => setSearchOpen(!searchOpen)}
-            className="p-2 rounded-lg text-vexo-text-secondary hover:text-white hover:bg-vexo-glass transition-all" id="search-toggle">
+          <button
+            onClick={() => setSearchOpen(!searchOpen)}
+            aria-label={searchOpen ? 'Close search' : 'Open search'}
+            aria-expanded={searchOpen}
+            className="p-2 rounded-lg text-vexo-text-secondary hover:text-white hover:bg-vexo-glass transition-all"
+            id="search-toggle"
+          >
             <HiOutlineSearch size={20} />
           </button>
 
           {/* Wishlist */}
-          <Link to="/wishlist" className="p-2 rounded-lg text-vexo-text-secondary hover:text-white hover:bg-vexo-glass transition-all hidden md:block">
+          <Link
+            to="/wishlist"
+            aria-label="View Wishlist"
+            className="p-2 rounded-lg text-vexo-text-secondary hover:text-white hover:bg-vexo-glass transition-all hidden md:block"
+          >
             <HiOutlineHeart size={20} />
           </Link>
 
           {/* Cart */}
-          <button onClick={openCart} className="p-2 rounded-lg text-vexo-text-secondary hover:text-white hover:bg-vexo-glass transition-all relative" id="cart-toggle">
+          <button
+            onClick={openCart}
+            aria-label={`View Cart, ${totalItems} ${totalItems === 1 ? 'item' : 'items'}`}
+            className="p-2 rounded-lg text-vexo-text-secondary hover:text-white hover:bg-vexo-glass transition-all relative"
+            id="cart-toggle"
+          >
             <HiOutlineShoppingBag size={20} />
             {totalItems > 0 && (
-              <motion.span initial={{ scale: 0 }} animate={{ scale: 1 }}
-                className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-vexo-blue text-xs font-bold flex items-center justify-center text-vexo-bg">
+              <motion.span
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                aria-hidden="true"
+                className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-vexo-blue text-xs font-bold flex items-center justify-center text-vexo-bg"
+              >
                 {totalItems}
               </motion.span>
             )}
@@ -77,15 +95,19 @@ export default function Navbar() {
           {/* User */}
           {isAuthenticated ? (
             <div className="relative group">
-              <button className="p-2 rounded-lg text-vexo-text-secondary hover:text-white hover:bg-vexo-glass transition-all">
+              <button
+                aria-label="User menu"
+                aria-haspopup="menu"
+                className="p-2 rounded-lg text-vexo-text-secondary hover:text-white hover:bg-vexo-glass transition-all"
+              >
                 <HiOutlineUser size={20} />
               </button>
-              <div className="absolute right-0 top-full mt-2 w-48 glass-card p-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                <p className="px-3 py-2 text-sm text-vexo-text-secondary border-b border-vexo-border mb-1">{user?.name}</p>
-                <Link to="/profile" className="block px-3 py-2 text-sm hover:bg-vexo-glass rounded-lg transition-colors">Profile</Link>
-                <Link to="/orders" className="block px-3 py-2 text-sm hover:bg-vexo-glass rounded-lg transition-colors">My Orders</Link>
-                <Link to="/wishlist" className="block px-3 py-2 text-sm hover:bg-vexo-glass rounded-lg transition-colors">Wishlist</Link>
-                <button onClick={() => logout()} className="block w-full text-left px-3 py-2 text-sm text-vexo-pink hover:bg-vexo-glass rounded-lg transition-colors">Logout</button>
+              <div className="absolute right-0 top-full mt-2 w-48 glass-card p-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200" role="menu" aria-label="User menu options">
+                <p className="px-3 py-2 text-sm text-vexo-text-secondary border-b border-vexo-border mb-1" role="none">{user?.name}</p>
+                <Link to="/profile" className="block px-3 py-2 text-sm hover:bg-vexo-glass rounded-lg transition-colors" role="menuitem">Profile</Link>
+                <Link to="/orders" className="block px-3 py-2 text-sm hover:bg-vexo-glass rounded-lg transition-colors" role="menuitem">My Orders</Link>
+                <Link to="/wishlist" className="block px-3 py-2 text-sm hover:bg-vexo-glass rounded-lg transition-colors" role="menuitem">Wishlist</Link>
+                <button onClick={() => logout()} className="block w-full text-left px-3 py-2 text-sm text-vexo-pink hover:bg-vexo-glass rounded-lg transition-colors" role="menuitem">Logout</button>
               </div>
             </div>
           ) : (
@@ -93,7 +115,12 @@ export default function Navbar() {
           )}
 
           {/* Mobile menu */}
-          <button onClick={() => setMobileOpen(!mobileOpen)} className="p-2 md:hidden text-vexo-text-secondary hover:text-white">
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={mobileOpen}
+            className="p-2 md:hidden text-vexo-text-secondary hover:text-white"
+          >
             {mobileOpen ? <HiOutlineX size={24} /> : <HiOutlineMenu size={24} />}
           </button>
         </div>
