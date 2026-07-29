@@ -1,0 +1,3 @@
+## 2026-07-29 - Accessible and Focusable Product Cards
+**Learning:** Wrapping interactive buttons like "Add to Cart" inside parent anchor tags/React Router links breaks accessibility tree structures and prevents proper keyboard navigation. Utilizing group-focus-within/group-hover combinations allows hidden hover controls to seamlessly reveal on keyboard focus without relying on pointer hovers.
+**Action:** Ensure action buttons are always sibling components to primary links within grid cards, provide descriptive context-aware ARIA labels featuring item names, and use Tailwind's `group-focus-within` utilities for smooth visual states.
