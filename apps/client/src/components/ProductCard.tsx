@@ -36,34 +36,44 @@ export default function ProductCard({ product, onAddToCart, onToggleWishlist, is
       transition={{ duration: 0.3 }}
       className="group glass-card overflow-hidden"
     >
-      {/* Image */}
-      <Link to={`/products/${product.slug}`} className="block relative overflow-hidden aspect-square bg-vexo-bg-tertiary">
-        <img
-          src={product.images[0]}
-          alt={product.name}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-          loading="lazy"
-        />
-        {/* Gradient overlay on hover */}
-        <div className="absolute inset-0 bg-gradient-to-t from-vexo-bg/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      {/* Container to separate image link and absolute buttons */}
+      <div className="relative overflow-hidden aspect-square bg-vexo-bg-tertiary">
+        {/* Image Link */}
+        <Link
+          to={`/products/${product.slug}`}
+          tabIndex={-1}
+          aria-hidden="true"
+          className="block w-full h-full focus:outline-none"
+        >
+          <img
+            src={product.images[0]}
+            alt=""
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+            loading="lazy"
+          />
+          {/* Gradient overlay on hover */}
+          <div className="absolute inset-0 bg-gradient-to-t from-vexo-bg/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        </Link>
 
         {/* Badges */}
-        <div className="absolute top-3 left-3 flex flex-col gap-2">
+        <div className="absolute top-3 left-3 flex flex-col gap-2 pointer-events-none">
           {discount > 0 && <span className="badge-sale">-{discount}%</span>}
           {product.featured && <span className="badge-featured">Featured</span>}
         </div>
 
-        {/* Quick actions on hover */}
-        <div className="absolute bottom-3 left-3 right-3 flex gap-2 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+        {/* Quick actions on hover & focus-within */}
+        <div className="absolute bottom-3 left-3 right-3 flex gap-2 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 translate-y-4 group-hover:translate-y-0 group-focus-within:translate-y-0 transition-all duration-300">
           <button
-            onClick={(e) => { e.preventDefault(); onAddToCart?.(); }}
-            className="flex-1 btn-primary py-2 text-sm flex items-center justify-center gap-2"
+            onClick={() => onAddToCart?.()}
+            aria-label={`Add ${product.name} to cart`}
+            className="flex-1 btn-primary py-2 text-sm flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vexo-blue focus-visible:ring-offset-2 focus-visible:ring-offset-vexo-bg"
           >
             <HiOutlineShoppingBag size={16} /> Add to Cart
           </button>
           <button
-            onClick={(e) => { e.preventDefault(); onToggleWishlist?.(); }}
-            className={`p-2 rounded-lg border transition-all ${
+            onClick={() => onToggleWishlist?.()}
+            aria-label={isInWishlist ? `Remove ${product.name} from wishlist` : `Add ${product.name} to wishlist`}
+            className={`p-2 rounded-lg border transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vexo-pink focus-visible:ring-offset-2 focus-visible:ring-offset-vexo-bg ${
               isInWishlist
                 ? 'bg-vexo-pink/20 border-vexo-pink text-vexo-pink'
                 : 'bg-vexo-glass border-vexo-border text-white hover:border-vexo-pink hover:text-vexo-pink'
@@ -72,13 +82,13 @@ export default function ProductCard({ product, onAddToCart, onToggleWishlist, is
             <HiOutlineHeart size={16} />
           </button>
         </div>
-      </Link>
+      </div>
 
       {/* Info */}
       <div className="p-4">
         <p className="text-xs text-vexo-text-muted uppercase tracking-wider mb-1">{product.category}</p>
-        <Link to={`/products/${product.slug}`}>
-          <h3 className="font-heading font-semibold text-sm md:text-base truncate hover:text-vexo-blue transition-colors">
+        <Link to={`/products/${product.slug}`} className="focus-visible:outline-none focus-visible:underline">
+          <h3 className="font-heading font-semibold text-sm md:text-base truncate hover:text-vexo-blue transition-colors focus-visible:text-vexo-blue">
             {product.name}
           </h3>
         </Link>
