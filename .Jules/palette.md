@@ -1,0 +1,3 @@
+## 2026-03-01 - Context-Aware ARIA Labels for Multi-Instance Action Controls
+**Learning:** Dynamic icon-only buttons in cart sidebars or list layouts (like increase/decrease controls) can be extremely confusing for screen readers if they lack context-aware labels. Providing simple labels like "Decrease" or "Increase" across multiple product instances fails to distinguish which product is being modified.
+**Action:** Always utilize template literals to embed the specific product's name into the `aria-label` (e.g., `aria-label={\`Decrease quantity of \${product.name}\`}`) to ensure screen reader users receive precise, descriptive feedback. Additionally, pair these controls with an `aria-live="polite"` region on the changing value display so updates are instantly announced.
