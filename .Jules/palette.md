@@ -1,0 +1,3 @@
+## 2026-08-11 - [Accessibility and Keyboard Navigation in Product Cards]
+**Learning:** Nested interactive components (like `<button>` inside an anchor `<Link>` tag) result in invalid HTML and major keyboard accessibility bugs. Also, default hover-based action elements are inaccessible to screen readers and keyboard-only users unless properly complemented with focus-trigger states like `group-focus-within`.
+**Action:** Always decouple nested interactive elements by grouping them in a shared parent container rather than an anchor tag. Make all hover actions accessible to keyboards with Tailwind's `group-focus-within` transitions and use semantic roles like `role="img"` with descriptive pluralized ARIA labels for ratings.
