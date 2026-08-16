@@ -53,18 +53,32 @@ export default function Navbar() {
         {/* Actions */}
         <div className="flex items-center gap-3">
           {/* Search */}
-          <button onClick={() => setSearchOpen(!searchOpen)}
-            className="p-2 rounded-lg text-vexo-text-secondary hover:text-white hover:bg-vexo-glass transition-all" id="search-toggle">
+          <button
+            onClick={() => setSearchOpen(!searchOpen)}
+            aria-label={searchOpen ? 'Close search bar' : 'Search products'}
+            aria-expanded={searchOpen}
+            className="p-2 rounded-lg text-vexo-text-secondary hover:text-white hover:bg-vexo-glass transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vexo-blue"
+            id="search-toggle"
+          >
             <HiOutlineSearch size={20} />
           </button>
 
           {/* Wishlist */}
-          <Link to="/wishlist" className="p-2 rounded-lg text-vexo-text-secondary hover:text-white hover:bg-vexo-glass transition-all hidden md:block">
+          <Link
+            to="/wishlist"
+            aria-label="Wishlist"
+            className="p-2 rounded-lg text-vexo-text-secondary hover:text-white hover:bg-vexo-glass transition-all hidden md:block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vexo-blue"
+          >
             <HiOutlineHeart size={20} />
           </Link>
 
           {/* Cart */}
-          <button onClick={openCart} className="p-2 rounded-lg text-vexo-text-secondary hover:text-white hover:bg-vexo-glass transition-all relative" id="cart-toggle">
+          <button
+            onClick={openCart}
+            aria-label={`Shopping cart, ${totalItems} ${totalItems === 1 ? 'item' : 'items'}`}
+            className="p-2 rounded-lg text-vexo-text-secondary hover:text-white hover:bg-vexo-glass transition-all relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vexo-blue"
+            id="cart-toggle"
+          >
             <HiOutlineShoppingBag size={20} />
             {totalItems > 0 && (
               <motion.span initial={{ scale: 0 }} animate={{ scale: 1 }}
@@ -77,7 +91,10 @@ export default function Navbar() {
           {/* User */}
           {isAuthenticated ? (
             <div className="relative group">
-              <button className="p-2 rounded-lg text-vexo-text-secondary hover:text-white hover:bg-vexo-glass transition-all">
+              <button
+                aria-label="User account menu"
+                className="p-2 rounded-lg text-vexo-text-secondary hover:text-white hover:bg-vexo-glass transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vexo-blue"
+              >
                 <HiOutlineUser size={20} />
               </button>
               <div className="absolute right-0 top-full mt-2 w-48 glass-card p-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
@@ -93,7 +110,12 @@ export default function Navbar() {
           )}
 
           {/* Mobile menu */}
-          <button onClick={() => setMobileOpen(!mobileOpen)} className="p-2 md:hidden text-vexo-text-secondary hover:text-white">
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label={mobileOpen ? 'Close navigation menu' : 'Open navigation menu'}
+            aria-expanded={mobileOpen}
+            className="p-2 md:hidden text-vexo-text-secondary hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vexo-blue"
+          >
             {mobileOpen ? <HiOutlineX size={24} /> : <HiOutlineMenu size={24} />}
           </button>
         </div>
@@ -108,7 +130,7 @@ export default function Navbar() {
               <div className="relative">
                 <HiOutlineSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-vexo-text-muted" size={20} />
                 <input type="text" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Search products..." className="input-field pl-12" autoFocus id="search-input" />
+                  placeholder="Search products..." aria-label="Search products" className="input-field pl-12" autoFocus id="search-input" />
               </div>
             </form>
           </motion.div>
