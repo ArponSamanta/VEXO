@@ -44,6 +44,9 @@ export default function CartSidebar() {
       {isOpen && (
         <motion.div
           key="cart-sidebar"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Shopping Cart"
           initial={{ x: '100%' }}
           animate={{ x: 0 }}
           exit={{ x: '100%' }}
@@ -55,7 +58,11 @@ export default function CartSidebar() {
             <h2 className="font-heading font-bold text-xl">
               Cart <span className="text-vexo-text-muted text-base font-normal">({totalItems})</span>
             </h2>
-            <button onClick={closeCart} className="p-2 rounded-lg hover:bg-vexo-glass transition-colors">
+            <button
+              onClick={closeCart}
+              aria-label="Close cart"
+              className="p-2 rounded-lg hover:bg-vexo-glass transition-colors focus-visible:ring-2 focus-visible:ring-vexo-blue focus-visible:outline-none"
+            >
               <HiOutlineX size={20} />
             </button>
           </div>
@@ -65,12 +72,13 @@ export default function CartSidebar() {
             {items.length === 0 ? (
               <div className="text-center py-16">
                 <p className="text-vexo-text-muted text-lg mb-4">Your cart is empty</p>
-                <Link to="/products" onClick={closeCart} className="btn-primary inline-block">Browse Products</Link>
+                <Link to="/products" onClick={closeCart} className="btn-primary inline-block focus-visible:ring-2 focus-visible:ring-vexo-blue focus-visible:outline-none">Browse Products</Link>
               </div>
             ) : (
               items.map((item) => {
                 const product = typeof item.product === 'object' ? item.product : null;
                 if (!product) return null;
+                const isMutating = updateMutation.isPending || removeMutation.isPending;
                 return (
                   <motion.div key={item._id} layout
                     className="flex gap-4 glass-card p-3">
@@ -80,17 +88,29 @@ export default function CartSidebar() {
                       <h4 className="font-medium text-sm truncate">{product.name}</h4>
                       <p className="text-vexo-blue font-semibold mt-1">{formatPrice(item.price)}</p>
                       <div className="flex items-center gap-2 mt-2">
-                        <button onClick={() => item.quantity > 1 && updateMutation.mutate({ itemId: item._id, quantity: item.quantity - 1 })}
-                          className="p-1 rounded bg-vexo-glass hover:bg-vexo-glass-hover transition-colors">
+                        <button
+                          onClick={() => item.quantity > 1 && updateMutation.mutate({ itemId: item._id, quantity: item.quantity - 1 })}
+                          disabled={item.quantity <= 1 || isMutating}
+                          aria-label={`Decrease quantity of ${product.name}`}
+                          className="p-1 rounded bg-vexo-glass hover:bg-vexo-glass-hover transition-colors disabled:opacity-40 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-vexo-blue focus-visible:outline-none"
+                        >
                           <HiOutlineMinus size={14} />
                         </button>
                         <span className="text-sm font-medium w-6 text-center">{item.quantity}</span>
-                        <button onClick={() => updateMutation.mutate({ itemId: item._id, quantity: item.quantity + 1 })}
-                          className="p-1 rounded bg-vexo-glass hover:bg-vexo-glass-hover transition-colors">
+                        <button
+                          onClick={() => updateMutation.mutate({ itemId: item._id, quantity: item.quantity + 1 })}
+                          disabled={isMutating}
+                          aria-label={`Increase quantity of ${product.name}`}
+                          className="p-1 rounded bg-vexo-glass hover:bg-vexo-glass-hover transition-colors disabled:opacity-40 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-vexo-blue focus-visible:outline-none"
+                        >
                           <HiOutlinePlus size={14} />
                         </button>
-                        <button onClick={() => removeMutation.mutate(item._id)}
-                          className="p-1 rounded text-vexo-pink hover:bg-vexo-pink/10 ml-auto transition-colors">
+                        <button
+                          onClick={() => removeMutation.mutate(item._id)}
+                          disabled={isMutating}
+                          aria-label={`Remove ${product.name} from cart`}
+                          className="p-1 rounded text-vexo-pink hover:bg-vexo-pink/10 ml-auto transition-colors disabled:opacity-40 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-vexo-blue focus-visible:outline-none"
+                        >
                           <HiOutlineTrash size={14} />
                         </button>
                       </div>
