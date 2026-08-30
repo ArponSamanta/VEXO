@@ -53,17 +53,19 @@ export default function ProductCard({ product, onAddToCart, onToggleWishlist, is
           {product.featured && <span className="badge-featured">Featured</span>}
         </div>
 
-        {/* Quick actions on hover */}
-        <div className="absolute bottom-3 left-3 right-3 flex gap-2 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+        {/* Quick actions on hover / focus */}
+        <div className="absolute bottom-3 left-3 right-3 flex gap-2 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 translate-y-4 group-hover:translate-y-0 group-focus-within:translate-y-0 transition-all duration-300">
           <button
             onClick={(e) => { e.preventDefault(); onAddToCart?.(); }}
-            className="flex-1 btn-primary py-2 text-sm flex items-center justify-center gap-2"
+            aria-label={`Add ${product.name} to cart`}
+            className="flex-1 btn-primary py-2 text-sm flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vexo-blue focus-visible:ring-offset-2 focus-visible:ring-offset-vexo-bg"
           >
             <HiOutlineShoppingBag size={16} /> Add to Cart
           </button>
           <button
             onClick={(e) => { e.preventDefault(); onToggleWishlist?.(); }}
-            className={`p-2 rounded-lg border transition-all ${
+            aria-label={isInWishlist ? `Remove ${product.name} from wishlist` : `Add ${product.name} to wishlist`}
+            className={`p-2 rounded-lg border transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vexo-pink focus-visible:ring-offset-2 focus-visible:ring-offset-vexo-bg ${
               isInWishlist
                 ? 'bg-vexo-pink/20 border-vexo-pink text-vexo-pink'
                 : 'bg-vexo-glass border-vexo-border text-white hover:border-vexo-pink hover:text-vexo-pink'
