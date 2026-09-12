@@ -53,18 +53,31 @@ export default function Navbar() {
         {/* Actions */}
         <div className="flex items-center gap-3">
           {/* Search */}
-          <button onClick={() => setSearchOpen(!searchOpen)}
-            className="p-2 rounded-lg text-vexo-text-secondary hover:text-white hover:bg-vexo-glass transition-all" id="search-toggle">
+          <button
+            onClick={() => setSearchOpen(!searchOpen)}
+            aria-label={searchOpen ? 'Close search bar' : 'Search products'}
+            className="p-2 rounded-lg text-vexo-text-secondary hover:text-white hover:bg-vexo-glass transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vexo-blue focus-visible:ring-offset-2 focus-visible:ring-offset-vexo-bg"
+            id="search-toggle"
+          >
             <HiOutlineSearch size={20} />
           </button>
 
           {/* Wishlist */}
-          <Link to="/wishlist" className="p-2 rounded-lg text-vexo-text-secondary hover:text-white hover:bg-vexo-glass transition-all hidden md:block">
+          <Link
+            to="/wishlist"
+            aria-label="Wishlist"
+            className="p-2 rounded-lg text-vexo-text-secondary hover:text-white hover:bg-vexo-glass transition-all hidden md:block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vexo-blue focus-visible:ring-offset-2 focus-visible:ring-offset-vexo-bg"
+          >
             <HiOutlineHeart size={20} />
           </Link>
 
           {/* Cart */}
-          <button onClick={openCart} className="p-2 rounded-lg text-vexo-text-secondary hover:text-white hover:bg-vexo-glass transition-all relative" id="cart-toggle">
+          <button
+            onClick={openCart}
+            aria-label={`Shopping cart, ${totalItems} ${totalItems === 1 ? 'item' : 'items'}`}
+            className="p-2 rounded-lg text-vexo-text-secondary hover:text-white hover:bg-vexo-glass transition-all relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vexo-blue focus-visible:ring-offset-2 focus-visible:ring-offset-vexo-bg"
+            id="cart-toggle"
+          >
             <HiOutlineShoppingBag size={20} />
             {totalItems > 0 && (
               <motion.span initial={{ scale: 0 }} animate={{ scale: 1 }}
@@ -77,7 +90,10 @@ export default function Navbar() {
           {/* User */}
           {isAuthenticated ? (
             <div className="relative group">
-              <button className="p-2 rounded-lg text-vexo-text-secondary hover:text-white hover:bg-vexo-glass transition-all">
+              <button
+                aria-label="User account menu"
+                className="p-2 rounded-lg text-vexo-text-secondary hover:text-white hover:bg-vexo-glass transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vexo-blue focus-visible:ring-offset-2 focus-visible:ring-offset-vexo-bg"
+              >
                 <HiOutlineUser size={20} />
               </button>
               <div className="absolute right-0 top-full mt-2 w-48 glass-card p-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
@@ -93,7 +109,11 @@ export default function Navbar() {
           )}
 
           {/* Mobile menu */}
-          <button onClick={() => setMobileOpen(!mobileOpen)} className="p-2 md:hidden text-vexo-text-secondary hover:text-white">
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+            className="p-2 md:hidden text-vexo-text-secondary hover:text-white rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vexo-blue focus-visible:ring-offset-2 focus-visible:ring-offset-vexo-bg"
+          >
             {mobileOpen ? <HiOutlineX size={24} /> : <HiOutlineMenu size={24} />}
           </button>
         </div>
