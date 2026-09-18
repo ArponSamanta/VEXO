@@ -70,8 +70,23 @@ export default function WishlistPage() {
                   {product.comparePrice && <span className="text-xs text-vexo-text-muted line-through">{formatPrice(product.comparePrice)}</span>}
                 </div>
                 <div className="flex gap-2 mt-3">
-                  <button onClick={() => addCartMut.mutate(product._id)} className="btn-primary flex-1 py-2 text-xs">Add to Cart</button>
-                  <button onClick={() => removeMut.mutate(product._id)} className="p-2 glass-card text-vexo-pink hover:bg-vexo-pink/10"><HiOutlineTrash size={16} /></button>
+                  <button
+                    onClick={() => addCartMut.mutate(product._id)}
+                    disabled={addCartMut.isPending || removeMut.isPending}
+                    aria-label={`Add ${product.name} to cart`}
+                    className="btn-primary flex-1 py-2 text-xs focus-visible:ring-2 focus-visible:ring-vexo-blue focus-visible:ring-offset-2 focus-visible:ring-offset-vexo-bg transition-all disabled:opacity-50"
+                  >
+                    Add to Cart
+                  </button>
+                  <button
+                    onClick={() => removeMut.mutate(product._id)}
+                    disabled={addCartMut.isPending || removeMut.isPending}
+                    aria-label={`Remove ${product.name} from wishlist`}
+                    title="Remove from wishlist"
+                    className="p-2 glass-card text-vexo-pink hover:bg-vexo-pink/10 focus-visible:ring-2 focus-visible:ring-vexo-pink focus-visible:ring-offset-2 focus-visible:ring-offset-vexo-bg transition-all disabled:opacity-50"
+                  >
+                    <HiOutlineTrash size={16} />
+                  </button>
                 </div>
               </div>
             </motion.div>
