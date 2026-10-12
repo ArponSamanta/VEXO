@@ -63,12 +63,31 @@ export default function CartPage() {
                     <p className="text-vexo-blue font-bold mt-1">{formatPrice(item.price)}</p>
                     <div className="flex items-center gap-3 mt-3">
                       <div className="flex items-center glass-card">
-                        <button onClick={() => item.quantity > 1 && updateMut.mutate({ id: item._id, qty: item.quantity - 1 })} className="p-2"><HiOutlineMinus size={14} /></button>
+                        <button
+                          onClick={() => item.quantity > 1 && updateMut.mutate({ id: item._id, qty: item.quantity - 1 })}
+                          disabled={item.quantity <= 1}
+                          aria-label={`Decrease quantity of ${p.name}`}
+                          className="p-2 disabled:opacity-40 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vexo-blue rounded"
+                        >
+                          <HiOutlineMinus size={14} />
+                        </button>
                         <span className="w-8 text-center text-sm font-medium">{item.quantity}</span>
-                        <button onClick={() => updateMut.mutate({ id: item._id, qty: item.quantity + 1 })} className="p-2"><HiOutlinePlus size={14} /></button>
+                        <button
+                          onClick={() => updateMut.mutate({ id: item._id, qty: item.quantity + 1 })}
+                          aria-label={`Increase quantity of ${p.name}`}
+                          className="p-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vexo-blue rounded"
+                        >
+                          <HiOutlinePlus size={14} />
+                        </button>
                       </div>
                       <span className="text-sm text-vexo-text-secondary">Subtotal: {formatPrice(item.price * item.quantity)}</span>
-                      <button onClick={() => removeMut.mutate(item._id)} className="ml-auto p-2 text-vexo-pink hover:bg-vexo-pink/10 rounded-lg"><HiOutlineTrash size={18} /></button>
+                      <button
+                        onClick={() => removeMut.mutate(item._id)}
+                        aria-label={`Remove ${p.name} from cart`}
+                        className="ml-auto p-2 text-vexo-pink hover:bg-vexo-pink/10 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vexo-pink"
+                      >
+                        <HiOutlineTrash size={18} />
+                      </button>
                     </div>
                   </div>
                 </motion.div>
