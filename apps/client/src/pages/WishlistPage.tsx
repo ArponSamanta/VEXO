@@ -60,18 +60,20 @@ export default function WishlistPage() {
           {products.map((product: any) => (
             <motion.div key={product._id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
               className="glass-card overflow-hidden group">
-              <Link to={`/products/${product.slug}`} className="block aspect-square bg-vexo-bg-tertiary overflow-hidden">
+              <Link to={`/products/${product.slug}`} tabIndex={-1} className="block aspect-square bg-vexo-bg-tertiary overflow-hidden">
                 <img src={product.images?.[0]} alt={product.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
               </Link>
               <div className="p-4">
-                <h3 className="font-heading font-semibold text-sm truncate">{product.name}</h3>
+                <Link to={`/products/${product.slug}`}>
+                  <h3 className="font-heading font-semibold text-sm truncate hover:text-vexo-blue transition-colors">{product.name}</h3>
+                </Link>
                 <div className="flex items-baseline gap-2 mt-1">
                   <span className="text-vexo-blue font-bold">{formatPrice(product.price)}</span>
                   {product.comparePrice && <span className="text-xs text-vexo-text-muted line-through">{formatPrice(product.comparePrice)}</span>}
                 </div>
                 <div className="flex gap-2 mt-3">
-                  <button onClick={() => addCartMut.mutate(product._id)} className="btn-primary flex-1 py-2 text-xs">Add to Cart</button>
-                  <button onClick={() => removeMut.mutate(product._id)} className="p-2 glass-card text-vexo-pink hover:bg-vexo-pink/10"><HiOutlineTrash size={16} /></button>
+                  <button onClick={() => addCartMut.mutate(product._id)} aria-label={`Add ${product.name} to cart`} className="btn-primary flex-1 py-2 text-xs">Add to Cart</button>
+                  <button onClick={() => removeMut.mutate(product._id)} aria-label={`Remove ${product.name} from wishlist`} className="p-2 glass-card text-vexo-pink hover:bg-vexo-pink/10"><HiOutlineTrash size={16} /><span className="sr-only">Remove {product.name} from wishlist</span></button>
                 </div>
               </div>
             </motion.div>
