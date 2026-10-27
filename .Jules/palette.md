@@ -1,0 +1,3 @@
+## 2025-02-18 - Slide-over Cart Accessibility and Control States
+**Learning:** Slide-over drawers require `role="dialog"`, `aria-modal="true"`, and an `aria-label` on the panel container to establish screen reader boundaries. In item lists, quantity control buttons need product-contextual `aria-label`s and `disabled` visual/interactive states when minimum values (e.g. quantity = 1) are reached to avoid user confusion.
+**Action:** Always add dialog semantics to drawer components and combine contextual ARIA labels with `disabled:opacity-40 disabled:cursor-not-allowed` styles on bounded counter controls.
