@@ -24,14 +24,18 @@ COPY . .
 # Set environment variables for production
 ENV NODE_ENV="production"
 ENV PORT=8080
-ENV MONGODB_URI="mongodb+srv://arponsamanta1234_db_user:QQ63B461lmBdDGQt@vexocluster.gorbxxk.mongodb.net/vexo?appName=vexoCluster"
-ENV JWT_SECRET="vexo-secure-prod-secret-9941a3d"
-ENV JWT_REFRESH_SECRET="vexo-refresh-prod-secret-b841f"
+# Secrets are supplied at runtime by the host (Render dashboard, docker run -e,
+# or an env file). Never bake them into the image.
+# Required at runtime: MONGODB_URI, JWT_SECRET, JWT_REFRESH_SECRET,
+# RAZORPAY_KEY_ID, RAZORPAY_KEY_SECRET, RAZORPAY_WEBHOOK_SECRET,
+# CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET,
+# CLIENT_URL, ADMIN_URL
 
 # Build the server package (and its dependencies)
 RUN npx turbo run build --filter=@vexo/server
 
 # Expose port
+# The host supplies PORT at runtime (Render injects it); the server reads process.env.PORT.
 EXPOSE 8080
 
 # Start the server
