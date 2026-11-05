@@ -1,0 +1,3 @@
+## 2025-05-18 - Card Interactive Nesting and Keyboard Focus Disclosure
+**Learning:** Interactive elements such as quick-action buttons must not be nested inside an anchor/Link tag. Wrapping the image in a secondary Link with tabIndex={-1} and aria-hidden="true" prevents redundant tab stops, while applying group-focus-within:opacity-100 to quick actions and background gradient overlays ensures keyboard accessibility and legible contrast.
+**Action:** Always separate card action buttons from main link targets and couple group-focus-within styles across interactive buttons and their underlying gradient overlays.
