@@ -54,7 +54,7 @@ export default function ProductCard({ product, onAddToCart, onToggleWishlist, is
         </div>
 
         {/* Quick actions on hover */}
-        <div className="absolute bottom-3 left-3 right-3 flex gap-2 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+        <div className="absolute bottom-3 left-3 right-3 flex gap-2 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 translate-y-4 group-hover:translate-y-0 group-focus-within:translate-y-0 transition-all duration-300">
           <button
             onClick={(e) => { e.preventDefault(); onAddToCart?.(); }}
             className="flex-1 btn-primary py-2 text-sm flex items-center justify-center gap-2"
@@ -63,6 +63,7 @@ export default function ProductCard({ product, onAddToCart, onToggleWishlist, is
           </button>
           <button
             onClick={(e) => { e.preventDefault(); onToggleWishlist?.(); }}
+            aria-label={isInWishlist ? "Remove from wishlist" : "Add to wishlist"}
             className={`p-2 rounded-lg border transition-all ${
               isInWishlist
                 ? 'bg-vexo-pink/20 border-vexo-pink text-vexo-pink'
@@ -85,9 +86,11 @@ export default function ProductCard({ product, onAddToCart, onToggleWishlist, is
 
         {/* Rating */}
         <div className="flex items-center gap-1 mt-2">
-          {[...Array(5)].map((_, i) => (
-            <HiStar key={i} size={14} className={i < Math.round(product.rating) ? 'text-yellow-400' : 'text-vexo-text-muted/30'} />
-          ))}
+          <div className="flex items-center gap-1" role="img" aria-label={`Rating: ${product.rating} out of 5 stars`}>
+            {[...Array(5)].map((_, i) => (
+              <HiStar key={i} size={14} className={i < Math.round(product.rating) ? 'text-yellow-400' : 'text-vexo-text-muted/30'} aria-hidden="true" />
+            ))}
+          </div>
           <span className="text-xs text-vexo-text-muted ml-1">({product.numReviews})</span>
         </div>
 
