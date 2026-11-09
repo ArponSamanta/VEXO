@@ -1,0 +1,3 @@
+## 2026-11-09 - Card Quick Actions and Image Link Nesting
+**Learning:** In e-commerce card components, wrapping the entire media block with an anchor tag while nesting interactive quick-action buttons inside causes invalid HTML and breaks screen reader accessibility. Furthermore, quick action overlays that are only shown on hover prevent keyboard users from accessing them unless `group-focus-within` is coupled with `group-hover`.
+**Action:** Separate the card media into an outer container with a child `Link` (with `tabIndex={-1}` and `aria-hidden="true"` to eliminate duplicate tab stops when the title is already a link) alongside independent action buttons equipped with `group-focus-within` visibility, high contrast focus rings, and contextual `aria-label`s.
