@@ -1,0 +1,5 @@
+# Palette UX & Accessibility Journal
+
+## 2026-11-10 - Keyboard Accessible Card Overlays and Semantic Ratings
+**Learning:** In e-commerce product cards where quick actions (Add to Cart, Wishlist) are hidden and appear on hover, nesting interactive buttons inside an outer `<Link>` breaks HTML specifications, creates nested focus traps, and prevents screen readers and keyboard-only users from discovering or triggering actions. Furthermore, setting `group-focus-within` on both the action buttons and the gradient overlay guarantees that when an action is tabbed into, the action buttons appear smoothly with proper visual contrast over background images.
+**Action:** Always decouple image links from overlay buttons using a shared relative container, apply `tabIndex={-1}` and `aria-hidden="true"` to duplicate card image links to keep keyboard tab order lean, and ensure `group-focus-within` transitions are matched on gradient backdrops. Provide dedicated `role="img"` and descriptive `aria-label` wrappers around star ratings.
